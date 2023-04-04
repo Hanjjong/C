@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:53:17 by jonhan            #+#    #+#             */
-/*   Updated: 2023/04/04 13:32:21 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/04/04 15:50:33 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int main(void)
 	fd = open("./test",O_RDONLY);
 	char * line = get_next_line(fd);
 	printf("%s", line);
-
 	return (0);
 }

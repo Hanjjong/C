@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:53:17 by jonhan            #+#    #+#             */
-/*   Updated: 2023/04/05 20:55:25 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/04/07 15:49:58 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*ft_read(int fd, char *buf, char *backup)
 	{
 		count = read(fd, buf, BUFFER_SIZE);
 		if (count == -1)
-			return (0);
+			return (NULL);
 		else if (count == 0)
 			break ;
 		buf[count] = '\0';
@@ -78,7 +78,11 @@ static char	*ft_detecnl(char *line)
 		return (0);
 	result = ft_substr(line, i + 1, ft_strlen(line) - 1);
 	if (!result)
+	{
+		free(result);
+		result = NULL;
 		return (NULL);
+	}
 	if (result[0] == '\0')
 	{
 		free(result);
@@ -103,12 +107,15 @@ char	*get_next_line(int fd)
 	free(buf);
 	buf = NULL;
 	if (!line)
+	{
+		free(backup);
+		backup = NULL;
 		return (NULL);
+	}
 	backup = ft_detecnl(line);
 	return (line);
 }
 /*
-
 #include <stdio.h>
 
 int main(void)
@@ -119,17 +126,19 @@ int main(void)
 	fd = 0;
 	fd = open("./test",O_RDONLY);
 	line = get_next_line(fd);
-	printf("|%s|\n", line);
+	printf("|%s|", line);
 	line = get_next_line(fd);
-	printf("|%s|\n", line);
+	printf("|%s|", line);
 	line = get_next_line(fd);
-	printf("|%s|\n", line);
+	printf("|%s|", line);
 	line = get_next_line(fd);
-	printf("|%s|\n", line);
+	printf("|%s|", line);
 	line = get_next_line(fd);
-	printf("|%s|\n", line);
+	printf("|%s|", line);
 	line = get_next_line(fd);
-	printf("|%s|\n", line);
+	printf("|%s|", line);
+	line = get_next_line(fd);
+	printf("|%s|", line);
 	return (0);
 }
 */

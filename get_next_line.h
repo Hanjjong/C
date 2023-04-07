@@ -6,12 +6,17 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:52:35 by jonhan            #+#    #+#             */
-/*   Updated: 2023/04/05 20:51:13 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/04/07 15:31:43 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4
+
+# endif
 
 # include <unistd.h>
 # include <stdlib.h>

@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:54:49 by jonhan            #+#    #+#             */
-/*   Updated: 2023/04/05 20:10:44 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/04/06 17:19:09 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_strdup(const char *src)
 	while (src[index] != '\0')
 		index++;
 	des = (char *)malloc((index + 1) * sizeof(char));
-	if (des == NULL)
+	if (!des)
 		return (NULL);
 	while (src[j] != '\0')
 	{

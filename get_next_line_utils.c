@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:54:49 by jonhan            #+#    #+#             */
-/*   Updated: 2023/04/06 17:19:09 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/04/16 17:17:34 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,30 @@
 
 size_t	ft_strlen(const char *str)
 {
-	size_t	a;
+	size_t	len;
 
-	a = 0;
-	while (str[a] != '\0')
-		a++;
-	return (a);
+	len = 0;
+	while (str[len])
+	{
+		len++;
+	}
+	return (len);
 }
 
-char	*ft_strdup(const char *src)
+char	*ft_strchr(char *str, int c)
+{
+	if (!str)
+	{
+		return (0);
+	}
+	while (*str != (char)c && *str != '\0')
+		str++;
+	if (*str != (char)c)
+		return (NULL);
+	return ((char *)str);
+}
+
+char	*ft_strdup(char *src)
 {
 	int		index;
 	int		j;
@@ -30,6 +45,10 @@ char	*ft_strdup(const char *src)
 
 	j = 0;
 	index = 0;
+	if (!src)
+	{
+		return (NULL);
+	}
 	while (src[index] != '\0')
 		index++;
 	des = (char *)malloc((index + 1) * sizeof(char));
@@ -44,38 +63,30 @@ char	*ft_strdup(const char *src)
 	return (des);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int	i;
+	char	*tmp;
+	int		i;
 
 	i = 0;
-	while (s[i] != '\0')
+	if (!s1 && s2)
+		return (ft_strdup(s2));
+	else if (s1 && !s2)
+		return (ft_strdup(s1));
+	else if (s1 && s2)
 	{
-		if (s[i] == (unsigned char)c)
-			return ((char *)s + i);
-		i++;
+		tmp = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+		if (!tmp)
+			return (0);
+		while (*s1)
+			tmp[i++] = *(s1++);
+		while (*s2)
+			tmp[i++] = *(s2++);
+		tmp[i] = '\0';
 	}
-	if (s[i] == (unsigned char)c)
-		return ((char *)s + i);
-	return (0);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*str;
-	size_t	s1_len;
-	size_t	s2_len;
-
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
-	if (!str)
-		return (NULL);
-	ft_strlcpy(str, s1, s1_len + 1);
-	ft_strlcpy(str + s1_len, s2, s2_len + 1);
-	return (str);
+	else
+		return (0);
+	return (tmp);
 }
 
 size_t	ft_strlcpy(char	*dst, const char	*src, size_t	dstsize)

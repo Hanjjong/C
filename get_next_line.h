@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:52:35 by jonhan            #+#    #+#             */
-/*   Updated: 2023/04/16 17:12:03 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/04/18 16:38:47 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *str);
-char	*ft_strchr(char *str, int c);
+size_t	ft_strlen(char *str);
+int		ft_strchr_index(char *str, int c);
 char	*ft_strdup(char *s);
 char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlcpy(char	*dst, const char	*src, size_t	dstsize);
+size_t	ft_strlcpy(char	*dst, char	*src, size_t	dstsize);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:54:49 by jonhan            #+#    #+#             */
-/*   Updated: 2023/04/16 17:17:34 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/04/18 18:17:58 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(char *str)
 {
 	size_t	len;
 
@@ -24,17 +24,18 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-char	*ft_strchr(char *str, int c)
+int	ft_strchr_index(char *str, int c)
 {
+	int	i;
+
+	i = 0;
 	if (!str)
-	{
-		return (0);
-	}
-	while (*str != (char)c && *str != '\0')
-		str++;
-	if (*str != (char)c)
-		return (NULL);
-	return ((char *)str);
+		return (-123);
+	while ((str[i] != c) && (str[i] != '\0'))
+		i++;
+	if (str[i] != c)
+		return (-1);
+	return (i);
 }
 
 char	*ft_strdup(char *src)
@@ -65,31 +66,25 @@ char	*ft_strdup(char *src)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*tmp;
-	int		i;
+	char	*str;
+	size_t	s1_len;
+	size_t	s2_len;
 
-	i = 0;
-	if (!s1 && s2)
-		return (ft_strdup(s2));
-	else if (s1 && !s2)
-		return (ft_strdup(s1));
-	else if (s1 && s2)
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	if (!s1 || !s2)
+		return (NULL);
+	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!str)
 	{
-		tmp = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-		if (!tmp)
-			return (0);
-		while (*s1)
-			tmp[i++] = *(s1++);
-		while (*s2)
-			tmp[i++] = *(s2++);
-		tmp[i] = '\0';
+		return (NULL);
 	}
-	else
-		return (0);
-	return (tmp);
+	ft_strlcpy(str, s1, s1_len + 1);
+	ft_strlcpy(str + s1_len, s2, s2_len + 1);
+	return (str);
 }
 
-size_t	ft_strlcpy(char	*dst, const char	*src, size_t	dstsize)
+size_t	ft_strlcpy(char	*dst, char *src, size_t dstsize)
 {
 	size_t	temp;
 	size_t	i;
